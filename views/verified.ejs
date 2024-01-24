@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <title>Welcome</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Quicksand", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #111;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .ring {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ring i {
+      position: absolute;
+      inset: 0;
+      border: 2px solid #fff;
+      transition: 0.5s;
+    }
+
+    .ring i:nth-child(1) {
+      border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+      animation: animate 6s linear infinite;
+    }
+
+    .ring i:nth-child(2) {
+      border-radius: 55% 45% 55% 45%/45% 55% 55% 45%;
+      animation: animate 4s linear infinite;
+    }
+
+    .ring i:nth-child(3) {
+      border-radius: 40% 60% 60% 40%/60% 40% 40% 60%;
+      animation: animate2 10s linear infinite;
+    }
+
+    .ring:hover i {
+      border: 6px solid var(--clr);
+      filter: drop-shadow(0 0 20px var(--clr));
+    }
+
+    @keyframes animate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes animate2 {
+      0% {
+        transform: rotate(360deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    .user-details {
+      text-align: center;
+    }
+
+    .user-details h2 {
+      font-size: 2em;
+      color: #fff;
+    }
+
+    .user-details p {
+      font-size: 1.2em;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ring">
+    <i style="--clr:#00ff0a;"></i>
+    <i style="--clr:#ff0057;"></i>
+    <i style="--clr:#0800ff;"></i>
+    <div class="user-details">
+      <h2>Welcome Back <span id ="type"></span></h2>
+      <p>Name: <span><%= user.name %></span></p>
+      <p>Email: <span><%= user.email %></span></p>
+      <p>Mobile Number: <span><%= user.mobile_no %></span></p>
+      <p>Password: <span><%= user.password %></span></p>
+    </div>
+  </div>
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script>
+    var typed = new Typed('#type', {
+      strings: ['Soldier'],
+      typeSpeed: 300,
+      backDelay: 100,
+      backSpeed: 60,
+      loop: true,
+      showCursor: false,
+    });
+  </script>
+</body>
+</html>
+
+

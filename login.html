@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Include any necessary meta tags, stylesheets, and scripts here -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/styles.css">
+  <base ref="/">
+  <style>
+    .error-message {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="ring">
+    <i style="--clr:#00ff0a;"></i>
+    <i style="--clr:#ff0057;"></i>
+    <i style="--clr:#0800ff;"></i>
+    <div class="login">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="inputbox">
+          <input type="text" id="email" placeholder="Email">
+        </div>
+        <div class="inputbox">
+          <input type="password" id="password" placeholder="Password">
+        </div>
+        <div class="inputbox">
+          <input type="submit" value="Sign in">
+        </div>
+      </form>
+      <div class="error-message" id="errorMessage" style="color:#fd0054"></div>
+      <div class="links">
+        <a href="#">Forget Password</a>
+        <a href="/register">Signup</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+    
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+    
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+    
+        if (response.ok) {
+          const userDetails = await response.json();
+          window.location.href = `/verified?name=${encodeURIComponent(userDetails.name)}&email=${encodeURIComponent(userDetails.email)}&mobile_no=${encodeURIComponent(userDetails.mobile_no)}&password=${encodeURIComponent(userDetails.password)}`;
+        } else {
+          const errorMessage = await response.text();
+          document.getElementById('errorMessage').innerText = errorMessage;
+        }
+      } catch (error) {
+        console.error('Error during login:', error.message);
+        document.getElementById('errorMessage').innerText = 'Error during login. Please try again.';
+      }
+    });
+    
+  </script>
+</body>
+</html>
+

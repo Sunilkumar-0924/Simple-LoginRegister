@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/styles.css">
+    <base ref="/">
+    <style>
+        .ring {
+            position: relative;
+            width: 700px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="ring">
+        <i style="--clr:#00ff0a;"></i>
+        <i style="--clr:#ff0057;"></i>
+        <i style="--clr:#0800ff;"></i>
+        <div class="login">
+            <h2>Sign Up</h2>
+            <form id="signupForm" action="/register" method="post">
+                <div class="inputbox">
+                    <input type="text" id="name" placeholder="Name" required autocomplete="off">
+                </div>
+                <div class="inputbox">
+                    <input type="email" id="email" placeholder="Email" required autocomplete="off">
+                </div>
+                <div class="inputbox">
+                    <input type="tel" id="mobile_no" placeholder="Phone Number" required autocomplete="off">
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="inputbox">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <p class="password-error" id="passwordError"></p>
+                </div>
+                <div class="inputbox">
+                    <div class="response-message" id="responseMessage" style="color: rgb(51, 255, 0); align-items: center; justify-content: center"></div>
+                    <input type="submit" value="Sign up">
+                </div>
+                <div class="links">
+                    <a href="/login">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+
+      const passwordField = document.getElementById("password");
+        const confirmPasswordField = document.getElementById("confirmPassword");
+        const passwordError = document.getElementById("passwordError");
+
+        function checkPasswordMatch() {
+            const password = passwordField.value;
+            const confirmPassword = confirmPasswordField.value;
+
+            if (password !== confirmPassword) {
+                passwordError.textContent = "Passwords don't match";
+            } else {
+                passwordError.textContent = "";
+            }
+        }
+
+        confirmPasswordField.addEventListener("input", checkPasswordMatch);
+      document.getElementById("signupForm").addEventListener("submit", function (event) {
+          event.preventDefault();
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const mobile_no = document.getElementById("mobile_no").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword = document.getElementById("confirmPassword").value;
+          const passwordError = document.getElementById("passwordError");
+          const responseMessage = document.getElementById("responseMessage");
+  
+          // Check if passwords match
+          if (password !== confirmPassword) {
+              passwordError.textContent = "Passwords don't match";
+              return;
+          } else {
+              passwordError.textContent = "";
+          }
+  
+          if (!name || !email || !mobile_no || !password || !confirmPassword || password !== confirmPassword) {
+            responseMessage.textContent = "Please fill in all fields correctly";
+            return;
+          }
+
+          fetch('/register', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ name, email, mobile_no, password }),
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.error) {
+                responseMessage.textContent = 'Error during registration: ' + data.error;
+              } else {
+                responseMessage.textContent = data.message;
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              responseMessage.textContent = 'Error during registration. Please try again.';
+          });
+      });
+  </script>
+</body>
+</html>
