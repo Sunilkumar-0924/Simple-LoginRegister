@@ -37,9 +37,6 @@ This project uses Nodemailer to send emails through the SMTP protocol. To test t
 Open the config.js file and update the email configuration with your SMTP server details.
 
 After updating the configuration, restart the application using:
-
-bash
-Copy code
 node app.js
 Register a new account, and the application will send a confirmation email to the provided email address.
 
