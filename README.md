@@ -7,37 +7,28 @@ Make sure you have the following installed on your machine:
 
 Node.js
 npm (Node Package Manager)
+
 Installation
+
 Clone the repository:
-
-bash
-Copy code
 git clone https://github.com/your-username/Simple-LoginRegister.git
+
 Navigate to the project directory:
-
-bash
-Copy code
 cd Simple-LoginRegister
-Install the required packages:
 
-bash
-Copy code
-npm install
+Install the required packages:
+npm install nodejs, express, mongoose, ejs, nodemailer
+
 Usage
 Open a terminal and run the following command to start the local server:
-
-bash
-Copy code
 node app.js
-Open your web browser and go to http://localhost:3000.
 
+Open your web browser and go to http://localhost:3000.
 The application should be up and running. You can now register a new account, log in, and explore the authentication features.
 
 Frontend and Styling
-The frontend is built using HTML and styled with CSS. The views are rendered using the EJS templating engine. To customize the frontend or styles:
-
+The front end is built using HTML and styled with CSS. The views are rendered using the EJS templating engine. To customize the frontend or styles:
 Navigate to the public directory for static assets such as CSS.
-
 The views directory contains EJS templates. Feel free to modify these files to enhance the user interface.
 
 Sending Emails
